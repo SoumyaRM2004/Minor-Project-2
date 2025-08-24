@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detectable Plant Diseases</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">🌾 List of Detectable Plant Diseases</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Plant Type</th>
+                    <th>Disease Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in diseases.plant_type.unique() %}
+                <tr>
+                    <td>{{ plant }}</td>
+                    <td>
+                        <ul>
+                            {% for disease in diseases[diseases.plant_type == plant]["disease_name"] %}
+                            <li>{{ disease }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">🔙 Go Back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div class="container text-center">
+    <h1 class="mt-5">✅ Prediction Result</h1>
+    <h2>Predicted Disease: {{ predicted_class }}</h2>
+    <p>Confidence: {{ '%.2f' | format(confidence * 100) }}%</p>
+
+    <h3>🩺 Suggested Treatment</h3>
+    <p>{{ disease_info[disease_info['disease_name'] == predicted_class].values[0] }}</p>
+
+    <h3>💊 Recommended Supplements</h3>
+    {% if supplement_data.shape[0] > 0 %}
+        <ul>
+        {% for index, row in supplement_data.iterrows() %}
+            <li>
+                <strong>{{ row['supplement_name'] }}</strong><br>
+                <img src="{{ row['image_url'] }}" alt="{{ row['supplement_name'] }}" style="width:100px;"><br>
+                <a href="{{ row['purchase_link'] }}" target="_blank">Purchase Link</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No supplements available for this disease.</p>
+    {% endif %}
+
+    <a href="/" class="btn btn-primary">🔙 Go Back</a>
+</div>
